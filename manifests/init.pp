@@ -327,29 +327,6 @@ class cont_int inherits verdi {
 
 
   #####################################################
-  # jenkins service
-  #####################################################
-
-  file { '/etc/systemd/system/jenkins.service':
-    ensure  => present,
-    mode    => 0644,
-    content => template('cont_int/jenkins.service'),
-    require => File['/usr/local/bin/jenkins.war'],
-    notify  => Exec['daemon-reload'],
-  }
-
-
-  service { 'jenkins':
-    ensure  => running,
-    enable  => true,
-    require => [
-                File['/etc/systemd/system/jenkins.service'],
-                Exec['daemon-reload'],
-               ],
-  }
-
-
-  #####################################################
   # override index.html from verdi
   #####################################################
 
@@ -359,30 +336,6 @@ class cont_int inherits verdi {
     mode    => 0644,
     require => Package['httpd'],
   }
-
-
-  #####################################################
-  # override firewalld config from verdi
-  #####################################################
-
-  Firewalld::Zone['public'] {
-    services => [ "ssh", "dhcpv6-client", "http", "https" ],
-    ports => [
-      {
-        # Jenkins
-        port     => "8080",
-        protocol => "tcp",
-      },
-    ]
-  }
-
-
-  #firewalld::service { 'dummy':
-  #  description	=> 'My dummy service',
-  #  ports       => [{port => '1234', protocol => 'tcp',},],
-  #  modules     => ['some_module_to_load'],
-  #  destination	=> {ipv4 => '224.0.0.251', ipv6 => 'ff02::fb'},
-  #}
 
 
 }
