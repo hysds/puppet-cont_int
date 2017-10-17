@@ -1,0 +1,14 @@
+[Unit]
+Description=Jenkins Service
+After=network.target
+
+[Service]
+Environment=JENKINS_HOME=<%= @jenkins_dir %>
+Type=simple
+User=<%= @user %>
+Group=<%= @group %>
+ExecStart=/usr/bin/java -jar /usr/local/bin/jenkins.war
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

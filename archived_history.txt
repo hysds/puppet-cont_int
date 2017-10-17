@@ -1,0 +1,38 @@
+commit 311ef2c6bb7dd194fe312d29fdc5bfa3d5165437
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Fri Jan 13 23:01:49 2017 +0000
+
+    update to latest version of jenkins (v2.32.1) and plugins
+
+commit 2ce779c105e9b8309269160447b8cc4da01890ea
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Jan 11 15:38:28 2017 +0000
+
+    inherit verdi puppet class and override CI specific settings
+
+commit ec6ba97a277f504b743cf91d8cbf0ed309f5cf83
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Thu Apr 14 15:11:38 2016 +0000
+
+    add embeddable build status plugin
+
+commit 97aa10889527307d3d8e369163d8c500d94b219a
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Wed Apr 13 21:56:25 2016 +0000
+
+    update jenkins installation
+    
+    Run as ops user.
+    Install needed plugins.
+
+commit ab09866226ae82294e5b8ed508fc1e7cbcdaa5d1
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Mon Mar 14 19:52:04 2016 +0000
+
+    ensure jenkins is running
+
+commit d955d80c1a3a69a5ad8273d9116b4b7228247150
+Author: gmanipon <gmanipon@jpl.nasa.gov>
+Date:   Mon Mar 14 19:48:16 2016 +0000
+
+    initial import
