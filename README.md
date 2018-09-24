@@ -13,3 +13,9 @@ As _root_ run:
 ```
 bash < <(curl -skL https://github.com/hysds/puppet-cont_int/raw/master/install.sh)
 ```
+```
+
+## Build Docker images
+```
+./build_docker.sh <tag>
+```
