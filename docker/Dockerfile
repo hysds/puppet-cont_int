@@ -15,7 +15,7 @@ RUN set -ex \
  && sudo rm -rf /var/cache/yum \
  && cd $HOME \
  && ./install_hysds.sh \
- && cd $HOME/ops \
+ && cd $HOME/verdi/ops \
  && git clone https://github.com/hysds/container-builder.git \
  && cd $HOME \
  && rm -rf $HOME/verdi/ops/*/.git* \
