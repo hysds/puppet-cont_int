@@ -24,6 +24,9 @@ RUN set -ex \
 
 FROM hysds/base:latest
 
+MAINTAINER Gerald Manipon (pymonger) "pymonger@gmail.com"
+LABEL description="HySDS continous integration image"
+
 # git url to hysds dev puppet module
 ENV GIT_URL https://github.com/hysds/puppet-cont_int/raw/docker/install.sh
 
