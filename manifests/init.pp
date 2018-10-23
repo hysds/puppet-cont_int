@@ -350,12 +350,20 @@ class cont_int inherits verdi {
 
 
   #####################################################
-  # override index.html from verdi
+  # override index.html and ssl.conf from verdi
   #####################################################
 
   File['/var/www/html/index.html'] {
     ensure  => file,
     content => template('cont_int/index.html'),
+    mode    => 0644,
+    require => Package['httpd'],
+  }
+
+
+  file { "/etc/httpd/conf.d/ssl.conf":
+    ensure  => present,
+    content => template('cont_int/ssl.conf'),
     mode    => 0644,
     require => Package['httpd'],
   }
