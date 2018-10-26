@@ -361,7 +361,7 @@ class cont_int inherits verdi {
   }
 
 
-  file { "/etc/httpd/conf.d/ssl.conf":
+  File['/etc/httpd/conf.d/ssl.conf'] {
     ensure  => present,
     content => template('cont_int/ssl.conf'),
     mode    => 0644,
