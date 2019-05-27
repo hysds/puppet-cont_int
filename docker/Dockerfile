@@ -24,9 +24,6 @@ RUN --mount=type=secret,id=git_oauth_token sudo cp /run/secrets/git_oauth_token 
  && sudo rm -rf /var/cache/yum \
  && cd $HOME \
  && ./install_hysds.sh ${RELEASE} \
- && cd $HOME/verdi/ops \
- && git clone https://github.com/hysds/container-builder.git \
- && cd $HOME \
  && rm -rf $HOME/verdi/ops/*/.git* \
  && rm -rf $HOME/.cache \
  && rm -rf $HOME/.git_oauth_token
