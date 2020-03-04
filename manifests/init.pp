@@ -39,10 +39,20 @@ class cont_int inherits verdi {
   }
 
 
+  file { "$jenkins_dir/hudson.model.UpdateCenter.xml":
+    ensure  => present,
+    mode    => 0644,
+    content => template('cont_int/hudson.model.UpdateCenter.xml'),
+    require => File["$jenkins_dir"],
+    notify  => Exec['daemon-reload'],
+  }
+
+
   cat_split_file { "jenkins.war":
     install_dir => "/etc/puppet/modules/cont_int/files",
     owner       =>  $user,
     group       =>  $group,
+    require     => File["$jenkins_dir/hudson.model.UpdateCenter.xml"],
   }
 
 
