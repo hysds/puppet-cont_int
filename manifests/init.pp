@@ -23,42 +23,6 @@ class cont_int inherits verdi {
 
 
   #####################################################
-  # install oracle java and set default
-  #####################################################
-
-  $jdk_rpm_file = "jdk-8u181-linux-x64.rpm"
-  $jdk_rpm_path = "/etc/puppet/modules/cont_int/files/$jdk_rpm_file"
-  $jdk_pkg_name = "jdk1.8"
-  $jdk_pkg_dir = "jdk1.8.0_181-amd64"
-  $java_bin_path = "/usr/java/$jdk_pkg_dir/jre/bin/java"
-
-
-  cat_split_file { "$jdk_rpm_file":
-    install_dir => "/etc/puppet/modules/cont_int/files",
-    owner       =>  $user,
-    group       =>  $group,
-  }
-
-
-  package { "$jdk_pkg_name":
-    provider => rpm,
-    ensure   => present,
-    source   => $jdk_rpm_path,
-    notify   => Exec['ldconfig'],
-    require     => Cat_split_file["$jdk_rpm_file"],
-  }
-
-
-  update_alternatives { 'java':
-    path     => $java_bin_path,
-    require  => [
-                 Package[$jdk_pkg_name],
-                 Exec['ldconfig']
-                ],
-  }
-
-
-  #####################################################
   # install jenkins war and plugins
   #####################################################
 
@@ -75,10 +39,20 @@ class cont_int inherits verdi {
   }
 
 
+  file { "$jenkins_dir/hudson.model.UpdateCenter.xml":
+    ensure  => present,
+    mode    => 0644,
+    content => template('cont_int/hudson.model.UpdateCenter.xml'),
+    require => File["$jenkins_dir"],
+    notify  => Exec['daemon-reload'],
+  }
+
+
   cat_split_file { "jenkins.war":
     install_dir => "/etc/puppet/modules/cont_int/files",
     owner       =>  $user,
     group       =>  $group,
+    require     => File["$jenkins_dir/hudson.model.UpdateCenter.xml"],
   }
 
 
