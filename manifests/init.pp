@@ -18,7 +18,7 @@ class cont_int inherits verdi {
   file { '/etc/rc.d/rc.local':
     ensure  => file,
     content  => template('cont_int/rc.local'),
-    mode    => 0755,
+    mode    => "0755",
   }
 
 
@@ -34,22 +34,21 @@ class cont_int inherits verdi {
     ensure  => directory,
     owner   => $user,
     group   => $group,
-    mode    => 0755,
+    mode    => "0755",
     require => User[$user],
   }
 
 
   file { "$jenkins_dir/hudson.model.UpdateCenter.xml":
     ensure  => present,
-    mode    => 0644,
+    mode    => "0644",
     content => template('cont_int/hudson.model.UpdateCenter.xml'),
     require => File["$jenkins_dir"],
-    notify  => Exec['daemon-reload'],
   }
 
 
-  cat_split_file { "jenkins.war":
-    install_dir => "/etc/puppet/modules/cont_int/files",
+  cont_int::cat_split_file { "jenkins.war":
+    install_dir => "/etc/puppetlabs/code/modules/cont_int/files",
     owner       =>  $user,
     group       =>  $group,
     require     => File["$jenkins_dir/hudson.model.UpdateCenter.xml"],
@@ -60,9 +59,9 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0755,
+    mode    => "0755",
     source  => "puppet:///modules/cont_int/jenkins.war",
-    require => Cat_split_file['jenkins.war'],
+    require => Cont_int::Cat_split_file['jenkins.war'],
   }
 
 
@@ -70,7 +69,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/ace-editor.jpi",
   }
 
@@ -79,7 +78,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/authorize-project.jpi",
   }
 
@@ -88,7 +87,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/branch-api.jpi",
   }
 
@@ -97,7 +96,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/cloudbees-folder.jpi",
   }
 
@@ -106,7 +105,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/durable-task.jpi",
   }
 
@@ -115,7 +114,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/ghprb.jpi",
   }
 
@@ -124,7 +123,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/git-client.jpi",
   }
 
@@ -133,7 +132,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/github-api.jpi",
   }
 
@@ -142,7 +141,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/github-branch-source.jpi",
   }
 
@@ -151,7 +150,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/github.jpi",
   }
 
@@ -160,7 +159,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/github-oauth.jpi",
   }
 
@@ -169,7 +168,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/github-organization-folder.jpi",
   }
 
@@ -178,7 +177,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/git.jpi",
   }
 
@@ -187,7 +186,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/icon-shim.jpi",
   }
 
@@ -196,7 +195,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/jquery-detached.jpi",
   }
 
@@ -205,7 +204,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/mapdb-api.jpi",
   }
 
@@ -214,7 +213,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/plain-credentials.jpi",
   }
 
@@ -223,7 +222,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/scm-api.jpi",
   }
 
@@ -232,7 +231,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/shiningpanda.jpi",
   }
 
@@ -241,7 +240,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/ssh-agent.jpi",
   }
 
@@ -250,7 +249,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/structs.jpi",
   }
 
@@ -259,7 +258,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/token-macro.jpi",
   }
 
@@ -268,7 +267,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/workflow-api.jpi",
   }
 
@@ -277,7 +276,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/workflow-cps.jpi",
   }
 
@@ -286,7 +285,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/workflow-job.jpi",
   }
 
@@ -295,7 +294,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/workflow-multibranch.jpi",
   }
 
@@ -304,7 +303,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/workflow-scm-step.jpi",
   }
 
@@ -313,7 +312,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/workflow-step-api.jpi",
   }
 
@@ -322,7 +321,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/workflow-support.jpi",
   }
 
@@ -331,7 +330,7 @@ class cont_int inherits verdi {
     ensure  => present,
     owner   => $user,
     group   => $group,
-    mode    => 0644,
+    mode    => "0644",
     source  => "puppet:///modules/cont_int/embeddable-build-status.jpi",
   }
 
@@ -343,7 +342,7 @@ class cont_int inherits verdi {
   File['/var/www/html/index.html'] {
     ensure  => file,
     content => template('cont_int/index.html'),
-    mode    => 0644,
+    mode    => "0644",
     require => Package['httpd'],
   }
 
@@ -351,7 +350,7 @@ class cont_int inherits verdi {
   File['/etc/httpd/conf.d/ssl.conf'] {
     ensure  => present,
     content => template('cont_int/ssl.conf'),
-    mode    => 0644,
+    mode    => "0644",
     require => Package['httpd'],
   }
 
