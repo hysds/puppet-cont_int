@@ -44,7 +44,6 @@ class cont_int inherits verdi {
     mode    => 0644,
     content => template('cont_int/hudson.model.UpdateCenter.xml'),
     require => File["$jenkins_dir"],
-    notify  => Exec['daemon-reload'],
   }
 
 
