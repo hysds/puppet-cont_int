@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.0-experimental
-ARG TAG=HC-522
+ARG TAG=HC-522-update
 FROM hysds/dev:${TAG}
 
 # get org and branch
@@ -60,16 +60,16 @@ RUN set -ex \
  && sudo rm -f /tmp/install.sh \
  && sudo rm -rf /var/cache/dnf
 
-# copy ops home
-COPY --chown=ops:ops --from=0 /home/ops /home/ops
+# copy root
+COPY --chown=root:root --from=0 /root /root
 
 # link configs
 RUN set -ex \
- && ln -sf /home/ops/verdi/etc/celeryconfig.py /home/ops/verdi/ops/hysds/celeryconfig.py
+ && ln -sf $HOME/verdi/etc/celeryconfig.py $HOME/verdi/ops/hysds/celeryconfig.py
 
 # set default supervisord conf and copy includes
-COPY --chown=ops:ops docker/supervisord.conf /home/ops/verdi/etc/supervisord.conf
-COPY --chown=ops:ops docker/conf.d /home/ops/verdi/etc/conf.d
+COPY --chown=root:root docker/supervisord.conf $HOME/verdi/etc/supervisord.conf
+COPY --chown=root:root docker/conf.d $HOME/verdi/etc/conf.d
 
 # set entrypoint
 COPY docker/docker-entrypoint.sh /docker-entrypoint.sh

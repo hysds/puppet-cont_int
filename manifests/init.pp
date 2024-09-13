@@ -8,7 +8,7 @@ class cont_int inherits verdi {
   # jenkins directory
   #####################################################
 
-  $jenkins_dir = "/home/$user/jenkins"
+  $jenkins_dir = "/$user/jenkins"
 
 
   #####################################################
